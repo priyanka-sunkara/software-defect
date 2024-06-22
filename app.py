@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import pickle
 import logging
 
@@ -14,7 +14,11 @@ except Exception as e:
 
 @app.route('/')
 def home():
-    return 'Welcome to the prediction app!'
+    return render_template('index.html')
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('errors/404.html'), 404
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -39,3 +43,4 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True)
+   
