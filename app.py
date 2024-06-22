@@ -15,10 +15,6 @@ except Exception as e:
 @app.route('/')
 def home():
     return render_template('index.html')
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('errors/404.html'), 404
-
 
 @app.route('/predict', methods=['POST'])
 def predict():
