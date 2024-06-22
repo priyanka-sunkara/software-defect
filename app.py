@@ -1,18 +1,18 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 import pickle
 
 app = Flask(__name__)
 
 # Load the trained Naive Bayes model
 try:
-    with open('naive_bayes_model.pkl' , 'rb') as f:
+    with open('naive_bayes_model.pkl', 'rb') as f:
         model = pickle.load(f)
 except Exception as e:
     print(f"Error loading model: {e}")
 
 @app.route('/')
 def home():
-    return('index.html')
+    return ('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -29,5 +29,5 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
