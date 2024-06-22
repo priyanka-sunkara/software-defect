@@ -7,7 +7,7 @@ from sklearn.naive_bayes import GaussianNB  # Assuming Gaussian Naive Bayes for 
 # Load the dataset (Allow user to upload their own CSV)
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
+    data = pd.read_csv(cm1.csv)
     st.write(data)  # Display the dataset
 
     # Define features and labels (You'll need to adjust this based on your dataset)
