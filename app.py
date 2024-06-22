@@ -1,11 +1,10 @@
-from io import SEEK_CUR
+from io import SEEK_END
 from typing import TypeVar
 from flask import Flask, request, jsonify
 from flask.scaffold import F
 import pickle
 
-from sklearn import model_selection
-T = TypeVar("T", model_selection, SEEK_CUR)
+T = TypeVar("T", SEEK_END, chr)
 
 app = Flask(__name__)
 
