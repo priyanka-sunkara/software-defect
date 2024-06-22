@@ -1,0 +1,60 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+
+# Create a synthetic dataset (replace this with your actual dataset)
+
+data = pd.read_csv('cm1.csv')
+
+df = pd.DataFrame(data)
+
+# Define features and labels
+X = df[['loc', 'v(g)', 'ev(g)','iv(g)','n','v','l','d','i','e','b','t','lOCode','lOComment','lOBlank','locCodeAndComment','uniq_Op','uniq_Opnd','total_Op','total_Opnd','branchCount']]
+y = df['defects']
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Feature-dependent Naive Bayes approach
+def feature_dependent_naive_bayes(X_train, y_train, X_test):
+    n_features = X_train.shape[1]
+    class_probs = {}
+
+    for label in np.unique(y_train):
+        class_probs[label] = len(y_train[y_train == label]) / len(y_train)
+
+    predictions = []
+
+    for i in range(X_test.shape[0]):
+        probabilities = {}
+
+        for label in np.unique(y_train):
+            prob = class_probs[label]
+
+            for j in range(n_features):
+                feature_value = X_test.iloc[i, j]
+                conditional_prob = len(X_train[(X_train[y_train == label].iloc[:, j] == feature_value) & (y_train == label)]) / len(X_train[y_train == label])
+                prob *= conditional_prob
+
+            probabilities[label] = prob
+
+        predictions.append(max(probabilities, key=probabilities.get))
+
+    return predictions
+
+# Apply feature-dependent Naive Bayes approach
+predictions = feature_dependent_naive_bayes(X_train, y_train, X_test)
+
+# Evaluate the classifier
+accuracy = sum(predictions == y_test) / len(y_test)
+print(f"Accuracy: {accuracy}")
+
+# Visualize the results
+plt.scatter(range(len(y_test)), y_test, label='Actual', color='blue')
+plt.scatter(range(len(predictions)), predictions, label='Predicted', color='red')
+plt.legend()
+plt.xlabel('Sample Index')
+plt.ylabel('Defective')
+plt.title('Actual vs. Predicted Defective Labels')
+plt.show()
