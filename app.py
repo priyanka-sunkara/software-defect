@@ -12,7 +12,7 @@ except Exception as e:
 
 @app.route('/')
 def home():
-    return render('index.html')
+    return('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
