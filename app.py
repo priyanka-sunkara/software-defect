@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import pickle
 
-app = Flask(_name_)
+app = Flask(__name__)  # Correct initialization of the Flask application
 
 # Load the trained Naive Bayes model
 with open('naive_bayes_model.pkl', 'rb') as f:
@@ -20,3 +20,4 @@ def predict():
 
 if _name_ == '_main_':
     app.run(debug=True)
+
