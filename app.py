@@ -1,5 +1,11 @@
+from io import SEEK_CUR
+from typing import TypeVar
 from flask import Flask, request, jsonify
+from flask.scaffold import F
 import pickle
+
+from sklearn import model_selection
+T = TypeVar("T", model_selection, SEEK_CUR)
 
 app = Flask(__name__)
 
@@ -9,6 +15,7 @@ try:
         model = pickle.load(f)
 except Exception as e:
     print(f"Error loading model: {e}")
+    F .seek(0)
 
 @app.route('/')
 def home():
