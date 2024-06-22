@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template
 import pickle
-import logging
 
 app = Flask(__name__)
 
@@ -9,8 +8,7 @@ try:
     with open('naive_bayes_model.pkl', 'rb') as f:
         model = pickle.load(f)
 except Exception as e:
-    logging.error(f"Error loading model: {e}")
-    raise  # Reraise the exception for debugging
+    print(f"Error loading model: {e}")
 
 @app.route('/')
 def home():
@@ -20,23 +18,16 @@ def home():
 def predict():
     try:
         # Extract features from the form
-        feature1 = float(request.form.get('feature1'))
-        feature2 = float(request.form.get('feature2'))
+        features = [float(request.form['feature1']), float(request.form['feature2'])]
         # Add more features as needed
 
-        # Validate input (example: check if features are within a valid range)
-        if not (0 <= feature1 <= 10 and 0 <= feature2 <= 10):
-            return jsonify({'error': 'Invalid input. Features must be between 0 and 10.'}), 400
-
         # Make prediction using the loaded model
-        prediction = model.predict([[feature1, feature2]])
-
+        prediction = model.predict([features])
+        
         # Return the prediction result as JSON
         return jsonify({'prediction': int(prediction[0])})
     except Exception as e:
-        logging.error(f"Prediction error: {e}")
-        return jsonify({'error': 'Internal server error'}), 500
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
-   
