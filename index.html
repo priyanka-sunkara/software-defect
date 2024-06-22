@@ -40,9 +40,9 @@
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
-                    document.getElementById('result').innerText = Error; {data.error};
+                    document.getElementById('result').innerText = Error: ${data.error};
                 } else {
-                    document.getElementById('result').innerText = Prediction; {data.prediction};
+                    document.getElementById('result').innerText = Prediction: ${data.prediction};
                 }
             })
             .catch(error => {
