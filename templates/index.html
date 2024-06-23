@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Defect Prediction</title>
+</head>
+<body>
+    <h1>Software Defect Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="loc">Lines of Code (LOC):</label>
+        <input type="number" name="loc" step="0.01" required><br>
+        <label for="v_g">v(g):</label>
+        <input type="number" name="v(g)" step="0.01" required><br>
+        <label for="lOCode">lOCode:</label>
+        <input type="number" name="lOCode" step="0.01" required><br>
+        <!-- Add more features here if needed -->
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <!-- Display prediction result -->
+    <div id="prediction-result">
+        {% if prediction is defined %}
+            {% if prediction == 1 %}
+                <p style="color: red;">Defective code segment</p>
+            {% else %}
+                <p style="color: green;">Non-defective code segment</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
