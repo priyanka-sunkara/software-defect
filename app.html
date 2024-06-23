@@ -10,11 +10,25 @@
     <form action="/predict" method="post">
         <label for="feature1">Feature 1:</label>
         <input type="number" name="feature1" step="0.01" required><br>
-        <!-- Add more feature input fields as needed -->
         <label for="feature2">Feature 2:</label>
         <input type="number" name="feature2" step="0.01" required><br>
+        <!-- Add more features here -->
+        <label for="feature3">Feature 3:</label>
+        <input type="number" name="feature3" step="0.01" required><br>
+        <!-- You can continue adding more features -->
+
         <button type="submit">Predict</button>
     </form>
-    <!-- Display prediction result here -->
+
+    <!-- Display prediction result -->
+    <div id="prediction-result">
+        {% if prediction is defined %}
+            {% if prediction == 1 %}
+                <p style="color: red;">Defective code segment</p>
+            {% else %}
+                <p style="color: green;">Non-defective code segment</p>
+            {% endif %}
+        {% endif %}
+    </div>
 </body>
 </html>
