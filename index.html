@@ -8,18 +8,50 @@
 <body>
     <h1>Software Defect Prediction</h1>
     <form action="/predict" method="post">
-        <label for="feature1">Feature 1 (e.g., Code Complexity):</label>
-        <input type="number" name="feature1" step="0.01" required><br>
-        <label for="feature2">Feature 2 (e.g., Code Churn):</label>
-        <input type="number" name="feature2" step="0.01" required><br>
+        <label for="loc">Lines of Code (LOC):</label>
+        <input type="number" name="loc" step="0.01" required><br>
+        <label for="v_g">v(g):</label>
+        <input type="number" name="v(g)" step="0.01" required><br>
+        <label for="ev_g">ev(g):</label>
+        <input type="number" name="ev(g)" step="0.01" required><br>
+        <label for="iv_g">iv(g):</label>
+        <input type="number" name="iv(g)" step="0.01" required><br>
+        <label for="n">n:</label>
+        <input type="number" name="n" step="0.01" required><br>
         <!-- Add more features here -->
-        <label for="feature3">Feature 3 (e.g., Lines of Code):</label>
-        <input type="number" name="feature3" step="0.01" required><br>
-        <!-- You can continue adding more features -->
-
-        <!-- Placeholder for dataset information -->
-        <input type="hidden" name="dataset" value="cm1.csv">
-        <!-- You can replace "GHPR Dataset" with your actual dataset name -->
+        <label for="v">v:</label>
+        <input type="number" name="v" step="0.01" required><br>
+        <label for="l">l:</label>
+        <input type="number" name="l" step="0.01" required><br>
+        <label for="d">d:</label>
+        <input type="number" name="d" step="0.01" required><br>
+        <label for="i">i:</label>
+        <input type="number" name="i" step="0.01" required><br>
+        <label for="e">e:</label>
+        <input type="number" name="e" step="0.01" required><br>
+        <label for="b">b:</label>
+        <input type="number" name="b" step="0.01" required><br>
+        <label for="t">t:</label>
+        <input type="number" name="t" step="0.01" required><br>
+        <label for="lOCode">lOCode:</label>
+        <input type="number" name="lOCode" step="0.01" required><br>
+        <label for="lOComment">lOComment:</label>
+        <input type="number" name="lOComment" step="0.01" required><br>
+        <label for="lOBlank">lOBlank:</label>
+        <input type="number" name="lOBlank" step="0.01" required><br>
+        <label for="locCodeAndComment">locCodeAndComment:</label>
+        <input type="number" name="locCodeAndComment" step="0.01" required><br>
+        <label for="uniq_Op">uniq_Op:</label>
+        <input type="number" name="uniq_Op" step="0.01" required><br>
+        <label for="uniq_Opnd">uniq_Opnd:</label>
+        <input type="number" name="uniq_Opnd" step="0.01" required><br>
+        <label for="total_Op">total_Op:</label>
+        <input type="number" name="total_Op" step="0.01" required><br>
+        <label for="total_Opnd">total_Opnd:</label>
+        <input type="number" name="total_Opnd" step="0.01" required><br>
+        <label for="branchCount">branchCount:</label>
+        <input type="number" name="branchCount" step="0.01" required><br>
+        <!-- Continue adding more features -->
 
         <button type="submit">Predict</button>
     </form>
