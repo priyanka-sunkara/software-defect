@@ -1,16 +1,24 @@
-from flask import Flask, request, redirect, url_for
+import pickle
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# Your feature-dependent Naive Bayes model (replace with your actual model)
+# Load your feature-dependent Naive Bayes model from the pickle file
+def load_model_from_pickle():
+    with open('naive_bayes_model.pkl', 'rb') as model_file:
+        model = pickle.load(model_file)
+    return model
+
+# Replace this with your actual prediction logic
 def predict_defect(loc, v_g, lOCode):
-    # Your prediction logic here
+    model = load_model_from_pickle()
+    # Your prediction logic using the loaded model
     # Example: return 1 if defect, else return 0
     return 1
 
 @app.route('/')
 def index():
-    return ('index.html')
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -18,7 +26,7 @@ def predict():
     v_g = float(request.form['v(g)'])
     lOCode = float(request.form['lOCode'])
 
-    # Call your prediction function
+    # Call your updated prediction function
     prediction = predict_defect(loc, v_g, lOCode)
 
     # Redirect to a new page to display the result
@@ -26,7 +34,7 @@ def predict():
 
 @app.route('/result/<int:prediction>')
 def result(prediction):
-    return ('result.html', prediction=prediction) # type: ignore
+    return render_template('result.html', prediction=prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)
