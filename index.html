@@ -18,16 +18,5 @@
 
         <button type="submit">Predict</button>
     </form>
-
-    <!-- Display prediction result -->
-    <div id="prediction-result">
-        {% if prediction is defined %}
-            {% if prediction == 1 %}
-                <p style="color: red;">Defective code segment</p>
-            {% else %}
-                <p style="color: green;">Non-defective code segment</p>
-            {% endif %}
-        {% endif %}
-    </div>
 </body>
 </html>

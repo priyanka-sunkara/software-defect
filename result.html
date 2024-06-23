@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Defect Prediction Result</title>
+</head>
+<body>
+    <h1>Software Defect Prediction Result</h1>
+    {% if prediction == 1 %}
+        <p style="color: red;">Defective code segment</p>
+    {% else %}
+        <p style="color: green;">Non-defective code segment</p>
+    {% endif %}
+</body>
+</html>
+
