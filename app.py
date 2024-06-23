@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ def predict_defect(loc, v_g, lOCode):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return ('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -26,7 +26,7 @@ def predict():
 
 @app.route('/result/<int:prediction>')
 def result(prediction):
-    return render_template('result.html', prediction=prediction)
+    return ('result.html', prediction=prediction) # type: ignore
 
 if __name__ == '__main__':
     app.run(debug=True)
