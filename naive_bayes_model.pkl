@@ -1,0 +1,42 @@
+# Example dataset (replace with your actual data)
+data = [
+    ([10, 3, 1.2, 0.8, ...], 'defective'),
+    ([5, 2, 0.5, 0.3, ...], 'non-defective'),
+    # Add more data points
+]
+
+# Calculate class priors
+def calculate_class_priors(data):
+    class_counts = {}
+    total_samples = len(data)
+    for _, label in data:
+        class_counts[label] = class_counts.get(label, 0) + 1
+    return {label: count / total_samples for label, count in class_counts.items()}
+
+# Calculate conditional probabilities
+def calculate_conditional_probs(data, features, label):
+    feature_counts = {}
+    label_count = 0
+    for feats, lbl in data:
+        if lbl == label:
+            label_count += 1
+            for feat in feats:
+                feature_counts[feat] = feature_counts.get(feat, 0) + 1
+    return {feat: count / label_count for feat, count in feature_counts.items()}
+
+# Make predictions
+def predict(data, features):
+    class_priors = calculate_class_priors(data)
+    predictions = {}
+    for label in class_priors:
+        cond_probs = calculate_conditional_probs(data, features, label)
+        prob = class_priors[label]
+        for feat in features:
+            prob *= cond_probs.get(feat, 1e-6)  # Smoothing to avoid zero probabilities
+        predictions[label] = prob
+    return max(predictions, key=predictions.get)
+
+# Example usage
+new_features = [10, 3, 1.2, 0.8, ...]  # Replace with your actual features
+predicted_class = predict(data, new_features)
+print(f"Predicted class: {predicted_class}")

@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Load the trained Naive Bayes model
 try:
-    with open('naive_bayes_model.pkl', 'rb') as f:
+    with open('C:\Users\Priyanka\Downloads\Project\software-defect\naive_bayes_model.pkl', 'rb') as f:
         model = pickle.load(f)
 except Exception as e:
     print(f"Error loading model: {e}")
