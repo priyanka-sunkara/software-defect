@@ -38,3 +38,4 @@ def result(prediction):
 
 if __name__ == '__main__':
     app.run(debug=True)
+    app.config['EXPLAIN_TEMPLATE_LOADING'] = True
