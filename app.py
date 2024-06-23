@@ -1,7 +1,7 @@
 import pickle
 from flask import Flask, render_template, request, redirect, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 # Load your feature-dependent Naive Bayes model from the pickle file
 def load_model_from_pickle():
